@@ -8,6 +8,7 @@ echo "set -g default-shell /bin/zsh\nset -g default-command /bin/zsh\n" > ~/.tmu
 bash tmux source-file ~/.tmux.conf
 echo "Installing SpaceVim..."
 curl -sLf https://spacevim.org/install.sh | bash
+vim
 echo "[[layers]]
   name = \"lang#c\"
 
