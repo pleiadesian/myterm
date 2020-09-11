@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "Home: $(readlink -f ~)"
-if [ $(readlink -f ~) = "/root" ];then
+echo "Home: $(echo ~)"
+if [ $(echo ~) = "/root" ];then
   echo "Do not install in root!"
   exit
 fi
