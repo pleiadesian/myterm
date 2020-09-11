@@ -2,6 +2,7 @@
 ## Prerequisite
 * tmux
 * git
+* clangd
 ## Install it
 make install
 ## Will install
