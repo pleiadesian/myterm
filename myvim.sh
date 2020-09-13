@@ -4,7 +4,11 @@ sed -i.bak 's/plugins=(git)/plugins=(git zsh-autosuggestions sudo)/g' ~/.zshrc &
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 source ~/.zshrc
 echo "Installing zsh in tmux..."
-echo "set -g default-shell /bin/zsh\nset -g default-command /bin/zsh\nset -g default-terminal \"screen-256color\"" > ~/.tmux.conf
+echo "set -g default-shell /bin/zsh" >> ~/.tmux.conf
+echo "set -g default-command /bin/zsh" >> ~/.tmux.conf
+echo "set -g default-terminal \"screen-256color\"" > ~/.tmux.conf
+echo "set-window-option -g visual-bell on" >> ~/.tmux.conf
+echo "set-window-option -g bell-action other" >> ~/.tmux.conf
 bash tmux source-file ~/.tmux.conf
 echo "Installing SpaceVim..."
 curl -sLf https://spacevim.org/install.sh | bash
