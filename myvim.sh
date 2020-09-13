@@ -1,6 +1,7 @@
 #!/bin/zsh
 sed -i.bak 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g' ~/.zshrc && rm ~/.zshrc.bak
-sed -i.bak 's/plugins=(git)/plugins=(git zsh-autosuggestions sudo)/g' ~/.zshrc && rm ~/.zshrc.bak
+sed -i.bak 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo)/g' ~/.zshrc && rm ~/.zshrc.bak
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 source ~/.zshrc
 echo "Installing zsh in tmux..."
