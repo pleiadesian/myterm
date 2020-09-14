@@ -7,7 +7,7 @@ source ~/.zshrc
 echo "Installing zsh in tmux..."
 echo "set -g default-shell /bin/zsh" >> ~/.tmux.conf
 echo "set -g default-command /bin/zsh" >> ~/.tmux.conf
-echo "set -g default-terminal \"screen-256color\"" > ~/.tmux.conf
+echo "set -g default-terminal \"screen-256color\"" >> ~/.tmux.conf
 echo "set-window-option -g visual-bell on" >> ~/.tmux.conf
 echo "set-window-option -g bell-action other" >> ~/.tmux.conf
 bash tmux source-file ~/.tmux.conf
