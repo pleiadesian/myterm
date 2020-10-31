@@ -10,6 +10,9 @@ echo "set -g default-command /bin/zsh" >> ~/.tmux.conf
 echo "set -g default-terminal \"screen-256color\"" >> ~/.tmux.conf
 echo "set-window-option -g visual-bell on" >> ~/.tmux.conf
 echo "set-window-option -g bell-action other" >> ~/.tmux.conf
+echo "unbind C-b" >> ~/.tmux.conf
+echo "set -g prefix `" >> ~/.tmux.conf
+echo "bind-key ` send-prefix" >> ~/.tmux.conf
 bash tmux source-file ~/.tmux.conf
 echo "Installing SpaceVim..."
 curl -sLf https://spacevim.org/install.sh | bash
