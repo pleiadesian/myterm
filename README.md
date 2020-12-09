@@ -5,6 +5,7 @@
 * clangd
 * autojump
 * zsh
+* vim
 ## Install it
 make install
 ## Will install
