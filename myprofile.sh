@@ -28,3 +28,4 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 " >> ~/.zshrc
+sed -i.bak 's/prompt_segment blue $CURRENT_FG/prompt_segment cyan $CURRENT_FG/g' ~/.oh-my-zsh/themes/agnoster.zsh-theme && rm ~/.oh-my-zsh/themes/agnoster.zsh-theme.bak
