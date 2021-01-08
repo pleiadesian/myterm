@@ -14,3 +14,17 @@ chsh -s /bin/zsh
 zsh ./myvim.sh
 echo "Installing shell integration..."
 curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+cp .dircolors ~/.dircolors
+echo "
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval \"\$(dircolors -b ~/.dircolors)\" || eval \"\$(dircolors -b)\"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+" >> ~/.zshrc
