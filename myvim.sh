@@ -14,7 +14,7 @@ echo "unbind C-b" >> ~/.tmux.conf
 echo "set -g prefix \`" >> ~/.tmux.conf
 echo "bind-key \` send-prefix" >> ~/.tmux.conf
 cat tmuxcolors.conf >> ~/.tmux.conf 
-bash tmux source-file ~/.tmux.conf
+tmux source-file ~/.tmux.conf
 echo "Installing SpaceVim..."
 curl -sLf https://spacevim.org/install.sh | bash
 vim
