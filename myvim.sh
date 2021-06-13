@@ -5,14 +5,27 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 source ~/.zshrc
 echo "Installing zsh in tmux..."
-echo "set -g default-shell /bin/zsh" >> ~/.tmux.conf
-echo "set -g default-command /bin/zsh" >> ~/.tmux.conf
-echo "set -g default-terminal \"screen-256color\"" >> ~/.tmux.conf
-echo "set-window-option -g visual-bell on" >> ~/.tmux.conf
-echo "set-window-option -g bell-action other" >> ~/.tmux.conf
-echo "unbind C-b" >> ~/.tmux.conf
-echo "set -g prefix \`" >> ~/.tmux.conf
-echo "bind-key \` send-prefix" >> ~/.tmux.conf
+echo "set -g default-shell /bin/zsh
+set -g default-command /bin/zsh
+set -g default-terminal \"screen-256color\"
+set-window-option -g visual-bell on
+set-window-option -g bell-action other
+unbind C-b
+set -g prefix \`
+bind-key \` send-prefix
+set -g mouse on
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'fcsonline/tmux-thumbs'
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'git@github.com:user/plugin'
+# set -g @plugin 'git@bitbucket.com:user/plugin'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'" >> ~/.tmux.conf
 cat tmuxcolors.conf >> ~/.tmux.conf 
 tmux source-file ~/.tmux.conf
 echo "Installing SpaceVim..."
