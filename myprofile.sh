@@ -5,6 +5,7 @@ if [ $(echo ~) = "/root" ];then
   echo "Do not install in root!"
   exit
 fi
+cp -v ~/.zshrc ~/.zshrc_backup
 sudo rm -r ~/.tmux.conf ~/.viminfo ~/.oh-my-zsh ~/.zshrc ~/.cache/*im*
 echo "Installing zsh..."
 rm -r ~/.oh-my-zsh
@@ -27,5 +28,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
+
+source ~/.pathrc  # configure your PATH
+source ~/.proxyrc  # configure your proxy
+
 " >> ~/.zshrc
 sed -i.bak 's/prompt_segment blue $CURRENT_FG/prompt_segment cyan $CURRENT_FG/g' ~/.oh-my-zsh/themes/agnoster.zsh-theme && rm ~/.oh-my-zsh/themes/agnoster.zsh-theme.bak

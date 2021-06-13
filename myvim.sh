@@ -4,7 +4,10 @@ sed -i.bak 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggest
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 source ~/.zshrc
-echo "Installing zsh in tmux..."
+
+echo "Installing tmux..."
+mkdir -p ~/.tmux/plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo "set -g default-shell /bin/zsh
 set -g default-command /bin/zsh
 set -g default-terminal \"screen-256color\"
@@ -28,6 +31,7 @@ set -g @plugin 'fcsonline/tmux-thumbs'
 run '~/.tmux/plugins/tpm/tpm'" >> ~/.tmux.conf
 cat tmuxcolors.conf >> ~/.tmux.conf 
 tmux source-file ~/.tmux.conf
+
 echo "Installing SpaceVim..."
 curl -sLf https://spacevim.org/install.sh | bash
 vim
