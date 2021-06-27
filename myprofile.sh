@@ -6,6 +6,7 @@ if [ $(echo ~) = "/root" ];then
   exit
 fi
 cp -v ~/.zshrc ~/.zshrc_backup
+touch ~/.pathrc ~/.proxyrc
 sudo rm -r ~/.tmux.conf ~/.viminfo ~/.oh-my-zsh ~/.zshrc ~/.cache/*im*
 echo "Installing zsh..."
 rm -r ~/.oh-my-zsh
