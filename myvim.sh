@@ -117,3 +117,17 @@ echo "[[layers]]
 [[layers]]
    name = \"debug\"
 " >> ~/.SpaceVim.d/init.toml
+
+# Install Anaconda
+echo "Installing Anaconda..."
+if [[ $(uname) == "Darwin" ]]; then
+  bash <(curl -s https://repo.anaconda.com/archive/Anaconda3-2021.05-MacOSX-x86_64.sh)
+else
+  bash <(curl -s https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh)
+fi
+
+# Install my scripts
+echo "Install utilities..."
+curl https://gist.githubusercontent.com/pleiadesian/7873552558e350d9405f989087266028/raw/b7cc26d59e6a101e2095880ecedf379dd8983120/jobnotifier.py > ~/anaconda3/bin/jobnotifier
+sudo chmod +x ~/anaconda3/bin/jobnotifier
+
