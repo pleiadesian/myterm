@@ -1,35 +1,33 @@
 #!/bin/bash
 
-
 cleanup() {
   echo "================================"
   echo "Cleaning old configs..."
-  cp -v ~/.zshrc ~/.zshrc.backup
-  cp -v ~/.tmux.conf ~/.tmux.conf.backup
-  rm -r ~/.tmux.conf ~/.viminfo ~/.oh-my-zsh ~/.zshrc ~/.cache/*im*
-  touch ~/.pathrc ~/.proxyrc # TODO: add desc for this
+  cp -v "${HOME}"/.zshrc "${HOME}"/.zshrc.backup
+  cp -v "${HOME}"/.tmux.conf "${HOME}"/.tmux.conf.backup
+  sudo rm -r "${HOME}"/.tmux "${HOME}"/.tmux.conf "${HOME}"/.viminfo "${HOME}"/.oh-my-zsh "${HOME}"/.zshrc "${HOME}"/.cache/*im*
+  touch "${HOME}"/.pathrc "${HOME}"/.proxyrc # TODO: add desc for this
 }
 
 install_zsh() {
   echo "================================"
   echo "Installing oh-my-zsh..."
   # Basic zsh installation
-  git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh # TODO: require git
-  cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+  git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh "${HOME}"/.oh-my-zsh # TODO: require git
+  cp "${HOME}"/.oh-my-zsh/templates/zshrc.zsh-template "${HOME}"/.zshrc
   chsh -s /bin/zsh # TODO: require zsh
   # zsh custom setups
   # zsh plugins
-  sed -i.bak 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"ys\"/g' ~/.zshrc &&
-    rm ~/.zshrc.bak
-  sed -i.bak 's/plugins=(git)/plugins=(git zsh-syntax-highlighting ' \
-    'zsh-autosuggestions sudo autojump extract)/g' \
-    ~/.zshrc && rm ~/.zshrc.bak # TODO: require autojump
+  sed -i.bak 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"ys\"/g' "${HOME}"/.zshrc &&
+    rm "${HOME}"/.zshrc.bak
+  sed -i.bak 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo autojump extract)/g' \
+    "${HOME}"/.zshrc && rm "${HOME}"/.zshrc.bak # TODO: require autojump
   git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-    "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+    "${ZSH_CUSTOM:-"${HOME}"/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
   git clone https://github.com/zsh-users/zsh-autosuggestions \
-    "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+    "${ZSH_CUSTOM:-"${HOME}"/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
   # dircolor
-  cp config/dircolors ~/.dircolors
+  cp config/dircolors "${HOME}"/.dircolors
   echo "
   # enable color support of ls and also add handy aliases
   if [ -x /usr/bin/dircolors ]; then
@@ -46,7 +44,8 @@ install_zsh() {
 
   " >>"${HOME}"/.zshrc
 
-  source "$HOME"/.zshrc # apply new zsh config
+# FIXME: unnecessary source
+#  source "${HOME}"/.zshrc
 }
 
 install_tmux() {
@@ -55,24 +54,42 @@ install_tmux() {
   git clone https://github.com/gpakosz/.tmux.git "$HOME"/.tmux
   ln -s -f "${HOME}"/.tmux/.tmux.conf "${HOME}"/.tmux.conf
   cp "${HOME}"/.tmux/.tmux.conf.local "${HOME}"/.tmux.conf.local # Add desc
-  tmux source-file ~/.tmux.conf                                  # apply new tmux config
+  tmux source-file "${HOME}"/.tmux.conf                                  # apply new tmux config
 }
 
 install_vim() {
   # TODO: complete this
   # TODO: require vim
-  echo ""
+  echo "================================"
+  echo "Installing SpaceVim..." # TODO: require tmux
+  curl -sLf https://spacevim.org/install.sh | bash
+  vim
+  echo "[[layers]]
+    name = \"lang#c\"
+  [[layers]]
+    name = \"lang#python\"
+  [[layers]]
+    name = \"lsp\"
+    filetypes = [
+      \"c\",
+      \"cpp\"
+    ]
+    [layers.override_cmd]
+      c = [\"clangd\"]
+  [[layers]]
+    name = \"format\"
+  [[layers]]
+     name = \"debug\"
+  " >> ~/.SpaceVim.d/init.toml
 }
 
 install_anaconda() {
   echo "================================"
   echo "Installing Anaconda..."
   if [[ $(uname) == "Darwin" ]]; then
-    bash <(curl -s "https://repo.anaconda.com/archive/" \
-      "Anaconda3-2021.05-MacOSX-x86_64.sh")
+    bash <(curl -s "https://repo.anaconda.com/archive/Anaconda3-2021.05-MacOSX-x86_64.sh")
   elif [[ $(uname) == "Linux" ]]; then
-    bash <(curl -s "https://repo.anaconda.com/archive/" \
-      "Anaconda3-2021.05-Linux-x86_64.sh")
+    bash <(curl -s "https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh")
   else
     echo "$(uname) OS type is not supported yet"
     exit 1
@@ -80,13 +97,13 @@ install_anaconda() {
 }
 
 install_util() {
-  echo "================================"
-  echo "Install utilities..."
-  curl "https://gist.githubusercontent.com/pleiadesian/" \
-    "7873552558e350d9405f989087266028/raw/" \
-    "b7cc26d59e6a101e2095880ecedf379dd8983120/jobnotifier.py" \
-    >~/anaconda3/bin/jobnotifier
-  sudo chmod +x ~/anaconda3/bin/jobnotifier
+  # FIXME
+  echo ""
+#  echo "================================"
+#  echo "Install utilities..."
+#  curl "https://gist.githubusercontent.com/pleiadesian/7873552558e350d9405f989087266028/raw/b7cc26d59e6a101e2095880ecedf379dd8983120/jobnotifier.py" \
+#    >"${HOME}"/anaconda3/bin/jobnotifier
+#  sudo chmod +x "${HOME}"/anaconda3/bin/jobnotifier
 }
 
 main() {
@@ -110,3 +127,5 @@ main() {
   install_anaconda
   install_util
 }
+
+main
