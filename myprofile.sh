@@ -39,8 +39,23 @@ install_zsh() {
       alias egrep='egrep --color=auto'
   fi
 
-  source ~/.pathrc  # configure your PATH
-  source ~/.proxyrc  # configure your proxy
+  # export for tmux
+  export EDITOR=vim
+
+  # alias for copy
+  alias copy="tmux save-buffer - | xclip -i -selection clipboard > /dev/null 2>&1"
+
+  # set keyboard rate
+  xset r rate 250 45
+
+  # set language
+  export LC_ALL=C
+
+  bindkey -v
+  bindkey \"^P\" up-line-or-search
+  bindkey \"^N\" down-line-or-search
+
+  source ~/.customrc  # configure your customized zshrc config
 
   " >>"${HOME}"/.zshrc
 
