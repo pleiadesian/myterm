@@ -1,5 +1,8 @@
 #!/bin/bash
 
+GITURL=git@github.com:
+# GITURL=${GITURL}
+
 cleanup() {
   echo "================================"
   echo "Cleaning old configs..."
@@ -13,7 +16,7 @@ install_zsh() {
   echo "================================"
   echo "Installing oh-my-zsh..."
   # Basic zsh installation
-  git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh "${HOME}"/.oh-my-zsh # TODO: require git
+  git clone --depth=1 ${GITURL}robbyrussell/oh-my-zsh "${HOME}"/.oh-my-zsh # TODO: require git
   cp "${HOME}"/.oh-my-zsh/templates/zshrc.zsh-template "${HOME}"/.zshrc
   chsh -s /bin/zsh # TODO: require zsh
   # zsh custom setups
@@ -22,9 +25,9 @@ install_zsh() {
     rm "${HOME}"/.zshrc.bak
   sed -i.bak 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo autojump extract)/g' \
     "${HOME}"/.zshrc && rm "${HOME}"/.zshrc.bak # TODO: require autojump
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting \
+  git clone ${GITURL}zsh-users/zsh-syntax-highlighting \
     "${ZSH_CUSTOM:-"${HOME}"/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
-  git clone https://github.com/zsh-users/zsh-autosuggestions \
+  git clone ${GITURL}zsh-users/zsh-autosuggestions \
     "${ZSH_CUSTOM:-"${HOME}"/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
   # dircolor
   cp config/dircolors "${HOME}"/.dircolors
@@ -66,7 +69,7 @@ install_zsh() {
 install_tmux() {
   echo "================================"
   echo "Installing oh-my-tmux..." # TODO: require tmux
-  git clone https://github.com/gpakosz/.tmux.git "$HOME"/.tmux
+  git clone ${GITURL}gpakosz/.tmux.git "$HOME"/.tmux
   ln -s -f "${HOME}"/.tmux/.tmux.conf "${HOME}"/.tmux.conf
   cp "${HOME}"/.tmux/.tmux.conf.local "${HOME}"/.tmux.conf.local # Add desc
   tmux source-file "${HOME}"/.tmux.conf                                  # apply new tmux config
