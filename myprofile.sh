@@ -43,7 +43,7 @@ install_zsh() {
   export EDITOR=vim
 
   # alias for copy
-  alias copy="tmux save-buffer - | xclip -i -selection clipboard > /dev/null 2>&1"
+  alias copy=\"tmux save-buffer - | xclip -i -selection clipboard > /dev/null 2>&1\"
 
   # set keyboard rate
   xset r rate 250 45
