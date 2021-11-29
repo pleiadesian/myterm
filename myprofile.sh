@@ -98,27 +98,11 @@ install_vim() {
   " >> ~/.SpaceVim.d/init.toml
 }
 
-install_anaconda() {
-  echo "================================"
-  echo "Installing Anaconda..."
-  if [[ $(uname) == "Darwin" ]]; then
-    bash <(curl -s "https://repo.anaconda.com/archive/Anaconda3-2021.05-MacOSX-x86_64.sh")
-  elif [[ $(uname) == "Linux" ]]; then
-    bash <(curl -s "https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh")
-  else
-    echo "$(uname) OS type is not supported yet"
-    exit 1
-  fi
-}
-
 install_util() {
   # FIXME
-  echo ""
+  echo "TODO: add utilities"
 #  echo "================================"
 #  echo "Install utilities..."
-#  curl "https://gist.githubusercontent.com/pleiadesian/7873552558e350d9405f989087266028/raw/b7cc26d59e6a101e2095880ecedf379dd8983120/jobnotifier.py" \
-#    >"${HOME}"/anaconda3/bin/jobnotifier
-#  sudo chmod +x "${HOME}"/anaconda3/bin/jobnotifier
 }
 
 main() {
@@ -139,7 +123,6 @@ main() {
   install_zsh
   install_tmux
   install_vim
-  install_anaconda
   install_util
 }
 
