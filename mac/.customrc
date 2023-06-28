@@ -1,0 +1,43 @@
+export LLVM_HOME=/usr/local/opt/llvm/bin
+# export JAVA_HOME=/usr/local/Cellar/openjdk@8/1.8.0+282  # jdk 8
+export JAVA_HOME=/usr/local/Cellar/openjdk@11/11.0.10  # jdk 11
+export ANANCONDA_HOME=/Users/wzl/anaconda3/bin
+export PATH=$PATH:$LLVM_HOME:$JAVA_HOME:$ANANCONDA_HOME
+
+# export for tmux
+export EDITOR=vim
+
+# alias for copy
+alias copy="tmux save-buffer - | xclip -i -selection clipboard > /dev/null 2>&1"
+
+# set language
+# export LC_ALL=C
+
+bindkey -v
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+
+export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/wzl/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/wzl/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/wzl/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/wzl/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+#
+
